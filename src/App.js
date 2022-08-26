@@ -1,22 +1,43 @@
-import logo from './logo.svg';
 import './App.css';
-
+import { useState } from 'react';
+import Album from "./components/Album"
+import AlbumList from "./components/AlbumList"
 function App() {
+  const [myAlbums, setMyAlbums] = useState(
+    [
+      {
+        title:"1 2 3",
+        tracks: ["Last night","Tommorow night","Tonight"]
+      },
+      {
+        title:"Usher",
+        tracks:["My boo","Confession pt.2", "Nevermind"]
+      },
+      {
+        title:"Björnes Magasin",
+        tracks:["Lilla snigel","Skyll inte på Hugo","Saft är gott!!!!"]
+      }
+])
+
+  let addAlbum = () => {
+    // setMyAlbums()
+    let albumTitle = document.querySelector("#title").value;
+
+    let newAlbum = {
+      title: albumTitle,
+      tracks:["Låt 1","Låt 2", "Låt 3"]
+    }
+
+    setMyAlbums([...myAlbums, newAlbum])
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      Add album: <input type="text" id="title"></input>
+      <button onClick={addAlbum}>Add album </button>
+        <h1>My albums</h1>
+        <AlbumList albums={myAlbums}/>
       </header>
     </div>
   );
